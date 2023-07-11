@@ -14,136 +14,136 @@ import (
 //not required
 const ChannelName = "mychannel"
 
-"receiptTypeAtOrigin": "CY",
-"deliveryTypeAtDestination": "CY",
-"cargoMovementTypeAtOrigin": "FCL",
-"cargoMovementTypeAtDestination": "FCL",
-"serviceContractReference": "string",
-"vesselName": "King of the Seas",
-"carrierServiceName": "Great Lion Service",
-"carrierServiceCode": "FE1",
-"universalServiceReference": "SR12345A",
-"carrierExportVoyageNumber": "2103S",
-"universalExportVoyageReference": "2103N",
-"declaredValue": 1231.1,
-"declaredValueCurrency": "DKK",
-"paymentTermCode": "PRE",
-"isPartialLoadAllowed": true,
-"isExportDeclarationRequired": true,
-"exportDeclarationReference": "ABC123123",
-"isImportLicenseRequired": true,
-"importLicenseReference": "ABC123123",
-"isCustomsFilingSubmissionByShipper": true,
-"contractQuotationReference": "DKK",
-"expectedDepartureDate": "2021-05-17",
-"expectedArrivalAtPlaceOfDeliveryStartDate": "2021-05-17",
-"expectedArrivalAtPlaceOfDeliveryEndDate": "2021-05-19",
-"transportDocumentTypeCode": "SWB",
-"transportDocumentReference": "string",
-"bookingChannelReference": "ABC12313",
-"incoTerms": "FCA",
-"communicationChannelCode": "AO",
-"isEquipmentSubstitutionAllowed": true,
-"vesselIMONumber": "9321483",
-"preCarriageModeOfTransportCode": "VESSEL",
-"invoicePayableAt": {
-  "locationName": "Eiffel Tower",
-  "UNLocationCode": "FRPAR"
-},
-"placeOfBLIssue": {
-  "locationName": "DCSA Headquarters",
-  "UNLocationCode": "NLAMS"
-},
-"commodities": [
-  {
-	"commodityType": "Mobile phones",
-	"HSCode": "string",
-	"cargoGrossWeight": 12000,
-	"cargoGrossWeightUnit": "KGM",
-	"cargoGrossVolume": 120,
-	"cargoGrossVolumeUnit": "MTQ",
-	"numberOfPackages": 18,
-	"exportLicenseIssueDate": "2021-05-14",
-	"exportLicenseExpiryDate": "2021-05-21",
-	"commodityRequestedEquipmentLink": "001"
-  }
-],
-"valueAddedServices": [
-  {
-	"valueAddedServiceCode": "SCON"
-  }
-],
-"references": [
-  {
-	"type": "FF",
-	"value": "string"
-  }
-],
-"requestedEquipments": [
-  {
-	"ISOEquipmentCode": "22RT",
-	"tareWeight": 4800,
-	"tareWeightUnit": "KGM",
-	"units": 3,
-	"equipmentReferences": [
-	  "PSSU2109481"
-	],
-	"isShipperOwned": true,
-	"commodityRequestedEquipmentLink": "001"
-  }
-],
-"documentParties": [
-  {
-	"party": {
-	  "partyName": "Asseco Denmark",
-	  "taxReference1": "CVR-25645774",
-	  "taxReference2": "CVR-25645774",
-	  "publicKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW",
-	  "address": {
-		"name": "Henrik",
-		"street": "Kronprinsessegade",
-		"streetNumber": "54",
-		"floor": "5. sal",
-		"postCode": "1306",
-		"city": "København",
-		"stateRegion": "N/A",
-		"country": "Denmark"
-	  },
-	  "partyContactDetails": [
-		{
-		  "name": "Henrik",
-		  "phone": "+45 33364660",
-		  "email": "info@dcsa.org",
-		  "url": "https://www.dcsa.org"
-		}
-	  ],
-	  "identifyingCodes": [
-		{
-		  "DCSAResponsibleAgencyCode": "SMDG",
-		  "partyCode": "MSK",
-		  "codeListName": "LCL"
-		}
-	  ]
-	},
-	"partyFunction": "DDS",
-	"displayedAddress": [
-	  "Kronprincessegade 54"
-	],
-	"isToBeNotified": true
-  }
-],
-"shipmentLocations": [
-  {
-	"location": {
-	  "locationName": "CMP Container Terminal Copenhagen",
-	  "UNLocationCode": "DKCPH",
-	  "facilityCode": "CMPDK",
-	  "facilityCodeListProvider": "SMDG"
-	},
-	"shipmentLocationTypeCode": "PRE",
-	"eventDateTime": "2021-11-03T10:23:00+01:00"
-  }
-]
+// "receiptTypeAtOrigin": "CY",
+// "deliveryTypeAtDestination": "CY",
+// "cargoMovementTypeAtOrigin": "FCL",
+// "cargoMovementTypeAtDestination": "FCL",
+// "serviceContractReference": "string",
+// "vesselName": "King of the Seas",
+// "carrierServiceName": "Great Lion Service",
+// "carrierServiceCode": "FE1",
+// "universalServiceReference": "SR12345A",
+// "carrierExportVoyageNumber": "2103S",
+// "universalExportVoyageReference": "2103N",
+// "declaredValue": 1231.1,
+// "declaredValueCurrency": "DKK",
+// "paymentTermCode": "PRE",
+// "isPartialLoadAllowed": true,
+// "isExportDeclarationRequired": true,
+// "exportDeclarationReference": "ABC123123",
+// "isImportLicenseRequired": true,
+// "importLicenseReference": "ABC123123",
+// "isCustomsFilingSubmissionByShipper": true,
+// "contractQuotationReference": "DKK",
+// "expectedDepartureDate": "2021-05-17",
+// "expectedArrivalAtPlaceOfDeliveryStartDate": "2021-05-17",
+// "expectedArrivalAtPlaceOfDeliveryEndDate": "2021-05-19",
+// "transportDocumentTypeCode": "SWB",
+// "transportDocumentReference": "string",
+// "bookingChannelReference": "ABC12313",
+// "incoTerms": "FCA",
+// "communicationChannelCode": "AO",
+// "isEquipmentSubstitutionAllowed": true,
+// "vesselIMONumber": "9321483",
+// "preCarriageModeOfTransportCode": "VESSEL",
+// "invoicePayableAt": {
+//   "locationName": "Eiffel Tower",
+//   "UNLocationCode": "FRPAR"
+// },
+// "placeOfBLIssue": {
+//   "locationName": "DCSA Headquarters",
+//   "UNLocationCode": "NLAMS"
+// },
+// "commodities": [
+//   {
+// 	"commodityType": "Mobile phones",
+// 	"HSCode": "string",
+// 	"cargoGrossWeight": 12000,
+// 	"cargoGrossWeightUnit": "KGM",
+// 	"cargoGrossVolume": 120,
+// 	"cargoGrossVolumeUnit": "MTQ",
+// 	"numberOfPackages": 18,
+// 	"exportLicenseIssueDate": "2021-05-14",
+// 	"exportLicenseExpiryDate": "2021-05-21",
+// 	"commodityRequestedEquipmentLink": "001"
+//   }
+// ],
+// "valueAddedServices": [
+//   {
+// 	"valueAddedServiceCode": "SCON"
+//   }
+// ],
+// "references": [
+//   {
+// 	"type": "FF",
+// 	"value": "string"
+//   }
+// ],
+// "requestedEquipments": [
+//   {
+// 	"ISOEquipmentCode": "22RT",
+// 	"tareWeight": 4800,
+// 	"tareWeightUnit": "KGM",
+// 	"units": 3,
+// 	"equipmentReferences": [
+// 	  "PSSU2109481"
+// 	],
+// 	"isShipperOwned": true,
+// 	"commodityRequestedEquipmentLink": "001"
+//   }
+// ],
+// "documentParties": [
+//   {
+// 	"party": {
+// 	  "partyName": "Asseco Denmark",
+// 	  "taxReference1": "CVR-25645774",
+// 	  "taxReference2": "CVR-25645774",
+// 	  "publicKey": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkFzaW",
+// 	  "address": {
+// 		"name": "Henrik",
+// 		"street": "Kronprinsessegade",
+// 		"streetNumber": "54",
+// 		"floor": "5. sal",
+// 		"postCode": "1306",
+// 		"city": "København",
+// 		"stateRegion": "N/A",
+// 		"country": "Denmark"
+// 	  },
+// 	  "partyContactDetails": [
+// 		{
+// 		  "name": "Henrik",
+// 		  "phone": "+45 33364660",
+// 		  "email": "info@dcsa.org",
+// 		  "url": "https://www.dcsa.org"
+// 		}
+// 	  ],
+// 	  "identifyingCodes": [
+// 		{
+// 		  "DCSAResponsibleAgencyCode": "SMDG",
+// 		  "partyCode": "MSK",
+// 		  "codeListName": "LCL"
+// 		}
+// 	  ]
+// 	},
+// 	"partyFunction": "DDS",
+// 	"displayedAddress": [
+// 	  "Kronprincessegade 54"
+// 	],
+// 	"isToBeNotified": true
+//   }
+// ],
+// "shipmentLocations": [
+//   {
+// 	"location": {
+// 	  "locationName": "CMP Container Terminal Copenhagen",
+// 	  "UNLocationCode": "DKCPH",
+// 	  "facilityCode": "CMPDK",
+// 	  "facilityCodeListProvider": "SMDG"
+// 	},
+// 	"shipmentLocationTypeCode": "PRE",
+// 	"eventDateTime": "2021-11-03T10:23:00+01:00"
+//   }
+// ]
 
 // BookingContract represents the chaincode implementation
 
