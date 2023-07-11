@@ -1,0 +1,74 @@
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"CapabilityLedgerSmartContract:InitLedger","Args":[]}'
+
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"MasterLedgerSmartContract:InitLedger","Args":[]}'
+
+
+peer chaincode query -C mychannel -n basic -c '{"Args":["CapabilityLedgerSmartContract:ReadAsset","2023-01-06","00","0","stock in"]}'
+peer chaincode query -C mychannel -n basic -c '{"Args":["CapabilityLedgerSmartContract:GetAssetHistory","2023-01-06","00","0","stock in"]}'
+{"date":"2023-01-06","sno":1,"ledgerID":"00","dealerId":"0","capability":"stock in","amount":200,"operation":"credit"}
+
+peer chaincode query -C mychannel -n basic -c '{"Args":["MasterLedgerSmartContract:ReadAsset","2023-01-06","01","1"]}'
+peer chaincode query -C mychannel -n basic -c '{"Args":["MasterLedgerSmartContract:GetAssetHistory","2023-01-06","01","1"]}'
+peer chaincode query -C mychannel -n basic -c '{"Args":["MasterLedgerSmartContract:GetAssetsByRange","2023-01-06","01","1"]}'
+
+first character of the key [\000date-ledgerId-dealerID\0002023-01-06\00001\0001\000] contains a null character which is not allowed
+
+peer chaincode query -C mychannel -n basic -c '{"Args":["MasterLedgerSmartContract:QueryAssetsWithPagination","{\"selector\":{\"date\":\"2023-01-06\"}}","3",""]}'
+
+peer chaincode query -C mychannel -n basic -c '{"Args":["CapabilityLedgerSmartContract:QueryAssetsWithPagination","{\"selector\":{\"date\":\"2023-01-06\"}}","3",""]}'
+
+
+chain code implementation steps 
+Reference link :https://hyperledger-fabric.readthedocs.io/en/latest/deploy_chaincode.html#package-the-smart-contract
+
+step 1: generating dependencies in vendor file by below command
+GO111MODULE=on go mod vendor
+
+Step 2: packaging chain chaincode
+configure path for peer binaries
+export PATH=${PWD}/../bin:$PATH
+export FABRIC_CFG_PATH=$PWD/../config/
+peer version  // which shows peer version
+now packaging chain code to basic.tar.gz
+peer lifecycle chaincode package basic.tar.gz --path ../asset-transfer-basic/chaincode-go/ --lang golang --label basic_1.0
+
+step 3: install packag into peer on different organization
+peer lifecycle chaincode install basic.tar.gz
+
+Step 4: get the packaging id 
+peer lifecycle chaincode queryinstalled
+
+Step 5: get it for approval by below command 
+peer lifecycle chaincode approveformyorg -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --channelID mychannel --name basic --version 1.0 --package-id $CC_PACKAGE_ID --sequence 1 --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem"
+
+step 6: checking commit readiness weather all organizations have approved or not
+peer lifecycle chaincode checkcommitreadiness --channelID mychannel --name basic --version 1.0 --sequence 1 --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" --output json
+
+step 7: committing the chain code by below command
+peer lifecycle chaincode commit -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --channelID mychannel --name basic --version 1.0 --sequence 1 --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt"
+
+step 8: checking chain code is committed or not by below command
+peer lifecycle chaincode querycommitted --channelID mychannel --name basic
+
+step 9:invoking the chain code 
+peer chaincode invoke -o localhost:7050 --ordererTLSHostnameOverride orderer.example.com --tls --cafile "${PWD}/organizations/ordererOrganizations/example.com/orderers/orderer.example.com/msp/tlscacerts/tlsca.example.com-cert.pem" -C mychannel -n basic --peerAddresses localhost:7051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org1.example.com/peers/peer0.org1.example.com/tls/ca.crt" --peerAddresses localhost:9051 --tlsRootCertFiles "${PWD}/organizations/peerOrganizations/org2.example.com/peers/peer0.org2.example.com/tls/ca.crt" -c '{"function":"InitLedger","Args":[]}'
+
+step 10: querying the chain code
+peer chaincode query -C mychannel -n basic -c '{"Args":["GetAllAssets"]}'
+
+creation of docker images
+docker build -t chaincodeimage1.0 .
+
+to send file to sagar
+scp -rv ./chaincodeimage1.0.tar sagar@192.168.0.10:/home/sagar/Documents
+generating tar file present in docker images
+docker save -o ./chaincodeimage1.0.tar chaincodeimage1.0
+
+docker run -e CHAINCODE_ID='basic:1b4b6c340a047595a1d27c9fdd1dc031467e02069ee6cec7904f999d31a49e23' -e CHAINCODE_SERVER_ADDRESS='0.0.0.0:7052' chaincodeimage1.0
+Eshwar changes:
+otp converted to string in struct
+created structure dosent matched while inserting record in db
+
+
+
