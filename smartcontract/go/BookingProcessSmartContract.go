@@ -272,6 +272,10 @@ type ShipmentLocation struct {
 	Location               Location `json:"location"`
 	ShipmentLocationTypeCode string   `json:"shipmentLocationTypeCode"`
 	EventDateTime         string   `json:"eventDateTime"`
+	FacilityCode           string   `json:"FacilityCode "`   
+    FacilityCodeListProvider  string   `json:"FacilityCodeListProvider"`
+	// ShipmentLocationTypeCode   string   `json:"FacilityCodeListProvider"`
+    // EventDateTime  string   `json:"FacilityCodeListProvider"`
 }
 
 type ValueAddedService struct {
